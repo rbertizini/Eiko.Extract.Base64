@@ -37,10 +37,13 @@ namespace Eiko.Extract.Base64
             }
 
             //Processando arquivos
+            int countXml = 0;
+            int countPdf = 0;
             foreach (string item in files)
             {
                 Console.WriteLine("Arquivo XML: " + item);
-                
+                countXml++;
+
                 XmlDocument doc = new XmlDocument();
                 doc.Load(item);
                 XmlNodeList elemList = doc.GetElementsByTagName("NFSImagem");
@@ -61,6 +64,7 @@ namespace Eiko.Extract.Base64
                     writer.Close();
 
                     Console.WriteLine("Arquivo PDF: " + item);
+                    countPdf++;
                 }
 
                 if (find == false)
@@ -71,6 +75,12 @@ namespace Eiko.Extract.Base64
                 //Directory.Move(file.FullName, filepath + "\\TextFiles\\" + file.Name);
             }
 
+            //Resumo
+            Console.WriteLine("Resumo de processamento");
+            Console.WriteLine("Arquivos XML processados: " + countXml);
+            Console.WriteLine("Arquivos PDF gerados: " + countPdf);
+
+            //Finalização
             Console.ReadLine();
         }
 
